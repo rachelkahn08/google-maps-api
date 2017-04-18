@@ -77,9 +77,9 @@
 
         // send request to google
         service = new google.maps.places.PlacesService(map);
-        service.textSearch(request, callback);
+        service.textSearch(request, callBack);
 
-        function callback(results, status) {
+        function callBack(results, status) {
           console.log("callback");
           if (status == google.maps.places.PlacesServiceStatus.OK) {
             console.log("okay");
