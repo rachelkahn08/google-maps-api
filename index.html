@@ -39,6 +39,7 @@
 
       //create the first map
       function initMap() {
+        console.log("initiated");
         buford = new google.maps.LatLng(41.1237, -105.3023);
         // send request/command(?) to google api
         map = new google.maps.Map(document.getElementById('map'), {
@@ -56,12 +57,15 @@
         window.addEventListener('keyup', function(e){
           if (e.keyCode == 13) {
             searchMaps();
+            console.log("enter");
           }
+          console.log("keyup");
         });
       }
 
       // search function
       function searchMaps(request, service) {
+        console.log("search");
         // define search terms
         request = {
           location: buford,
@@ -75,17 +79,21 @@
         service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
 
-        function callBack(results, status) {
+        function callback(results, status) {
+          console.log("callback");
           if (status == google.maps.places.PlacesServiceStatus.OK) {
+            console.log("okay");
             for (var i = 0; i < results.length; i++) {
              var place = results[i];
              createMarker(results[i]);
             }
+            console.log(results.length);
           } 
         }
 
         // display results
         function createMarker(results) {
+          console.log("marker");
           var infoWindow = new google.maps.InfoWindow({
             content: result.name
           });
@@ -99,7 +107,7 @@
         }
       }
     </script>
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEvSn9IEtRcZItpLOcDnWUCDPkefBm9i4&callback=initMap"></script>
+    
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEvSn9IEtRcZItpLOcDnWUCDPkefBm9i4&libraries=places&callback=initMap"></script>
   </body>
 </html>
